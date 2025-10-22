@@ -124,12 +124,14 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        /*
         MyStack stack = new MyStack();
         stack.Push(10);
         stack.Push(20);//
         stack.Push(30);
         stack.Push(90);//
         stack.Push(70);
+        */
 
         //Console.WriteLine(stack.IsEmpty());
 
@@ -138,9 +140,9 @@ internal class Program
         //Console.WriteLine(stack.Pop());
 
         //Console.WriteLine(stack.IsEmpty());
-        Console.WriteLine(stack.IsExist(20));
-        Console.WriteLine(stack.IsExist(90));
-        stack.Swap(20, 90);
-        ;
+        //Console.WriteLine(stack.IsExist(20));
+        //Console.WriteLine(stack.IsExist(90));
+        //stack.Swap(20, 90);
+        
     }
 }
