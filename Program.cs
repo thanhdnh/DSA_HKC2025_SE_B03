@@ -6,10 +6,12 @@
 public class MyStack
 {
     public Node top;
-    public bool IsEmpty(){
+    public bool IsEmpty()
+    {
         return top == null;
     }
-    public void Push(object newdata){
+    public void Push(object newdata)
+    {
         Node newnode = new Node();
         newnode.data = newdata;
         newnode.next = top;
@@ -47,13 +49,16 @@ public class MyStack
             Push(tempstack.Pop());
         return false;
     }
-    public void Swap(object a, object b){
-        if (IsExist(a) && IsExist(b)){
+    public void Swap(object a, object b)
+    {
+        if (IsExist(a) && IsExist(b))
+        {
             MyStack tempstack = new MyStack();
             bool foundA = false, foundB = false;
-            while (!IsEmpty()){
+            while (!IsEmpty())
+            {
                 object temp = Pop();
-                if(temp.Equals(a))
+                if (temp.Equals(a))
                     foundA = true;
                 if (temp.Equals(b))
                     foundB = true;
@@ -61,7 +66,8 @@ public class MyStack
                 if (foundA && foundB)
                     break;
             }
-            while (!tempstack.IsEmpty()){
+            while (!tempstack.IsEmpty())
+            {
                 object tempdata = tempstack.Pop();
                 if (tempdata.Equals(a))
                     Push(b);
@@ -75,6 +81,45 @@ public class MyStack
             return;
     }
 }
+public class Node2
+{
+    public Node2 prev, next;
+    public object data;
+}
+public class MyQueue
+{
+    Node2 rear, front; 
+    public bool IsEmpty()
+    {
+        return rear == null || front == null;
+    }
+    public void Enqueue(object ele)
+    {
+        Node2 n = new Node2();
+        n.data = ele;
+        if (rear == null)
+        {
+            rear = n; front = n;
+        }
+        else
+        {
+            rear.prev = n;
+            n.next = rear; rear = n;
+        }
+    }
+    public Node2 Dequeue()
+    {
+        if (front == null) return null;
+        Node2 d = front;
+        front = front.prev;
+        if (front == null)
+            rear = null;
+        else
+            front.next = null;
+        return d;
+    }
+}
+
 internal class Program
 {
     private static void Main(string[] args)
