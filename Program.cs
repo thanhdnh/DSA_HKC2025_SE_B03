@@ -15,12 +15,64 @@ public class MyStack
         newnode.next = top;
         top = newnode;
     }
-    public object Pop(){
+    public object Pop()
+    {
         if (IsEmpty())
             return null;
         Node temp = top;
         top = top.next;
         return temp.data;
+    }
+    public object Peek()
+    {
+        if (IsEmpty())
+            return null;
+        return top.data;
+    }
+    public bool IsExist(object data)
+    {
+        MyStack tempstack = new MyStack();
+        while (!IsEmpty())
+        {
+            object tempdata = Pop();
+            tempstack.Push(tempdata);
+            if (tempdata.Equals(data))
+            {
+                while (!tempstack.IsEmpty())
+                    Push(tempstack.Pop());
+                return true;
+            }
+        }
+        while (!tempstack.IsEmpty())
+            Push(tempstack.Pop());
+        return false;
+    }
+    public void Swap(object a, object b){
+        if (IsExist(a) && IsExist(b)){
+            MyStack tempstack = new MyStack();
+            bool foundA = false, foundB = false;
+            while (!IsEmpty()){
+                object temp = Pop();
+                if(temp.Equals(a))
+                    foundA = true;
+                if (temp.Equals(b))
+                    foundB = true;
+                tempstack.Push(temp);
+                if (foundA && foundB)
+                    break;
+            }
+            while (!tempstack.IsEmpty()){
+                object tempdata = tempstack.Pop();
+                if (tempdata.Equals(a))
+                    Push(b);
+                else if (tempdata.Equals(b))
+                    Push(a);
+                else
+                    Push(tempdata);
+            }
+        }
+        else
+            return;
     }
 }
 internal class Program
@@ -29,15 +81,21 @@ internal class Program
     {
         MyStack stack = new MyStack();
         stack.Push(10);
-        stack.Push(20);
+        stack.Push(20);//
         stack.Push(30);
+        stack.Push(90);//
+        stack.Push(70);
 
-        Console.WriteLine(stack.IsEmpty());
-        
-        Console.WriteLine(stack.Pop());
-        Console.WriteLine(stack.Pop());
-        Console.WriteLine(stack.Pop());
+        //Console.WriteLine(stack.IsEmpty());
 
-        Console.WriteLine(stack.IsEmpty());
+        //Console.WriteLine(stack.Pop());
+        //Console.WriteLine(stack.Pop());
+        //Console.WriteLine(stack.Pop());
+
+        //Console.WriteLine(stack.IsEmpty());
+        Console.WriteLine(stack.IsExist(20));
+        Console.WriteLine(stack.IsExist(90));
+        stack.Swap(20, 90);
+        ;
     }
 }
